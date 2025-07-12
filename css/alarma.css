@@ -1,0 +1,661 @@
+/* Estilos para la sección de Alarma */
+.alarm-section {
+    display: none;
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.alarm-card {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    border-radius: 36px;
+    padding: 50px 40px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 
+        0 8px 32px rgba(0, 0, 0, 0.1),
+        inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.alarm-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 255, 255, 0.1),
+        transparent
+    );
+    transition: left 0.5s;
+}
+
+.alarm-card:hover::before {
+    left: 100%;
+}
+
+.alarm-header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.alarm-title {
+    font-size: 3rem;
+    font-weight: 300;
+    color: rgba(255, 255, 255, 0.95);
+    margin-bottom: 12px;
+    letter-spacing: -1.5px;
+}
+
+.alarm-subtitle {
+    font-size: 1.2rem;
+    color: rgba(255, 255, 255, 0.7);
+    font-weight: 400;
+}
+
+/* Formulario de alarma */
+.alarm-form {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    margin-bottom: 40px;
+}
+
+.time-input-group {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    justify-content: center;
+}
+
+.time-input {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 18px;
+    padding: 18px 24px;
+    font-size: 1.4rem;
+    color: rgba(255, 255, 255, 0.9);
+    text-align: center;
+    backdrop-filter: blur(10px);
+    transition: all 0.3s ease;
+    width: 100px;
+}
+
+.time-input:focus {
+    outline: none;
+    border-color: rgba(255, 255, 255, 0.4);
+    background: rgba(255, 255, 255, 0.15);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.time-separator {
+    font-size: 1.8rem;
+    color: rgba(255, 255, 255, 0.6);
+    font-weight: 300;
+}
+
+.period-selector {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.period-btn {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 16px;
+    padding: 12px 24px;
+    color: rgba(255, 255, 255, 0.7);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 1.1rem;
+    font-weight: 500;
+}
+
+.period-btn.active {
+    background: rgba(255, 255, 255, 0.2);
+    color: rgba(255, 255, 255, 0.95);
+    border-color: rgba(255, 255, 255, 0.3);
+}
+
+.period-btn:hover {
+    background: rgba(255, 255, 255, 0.15);
+    transform: translateY(-2px);
+}
+
+/* Días de la semana */
+.days-selector {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 20px;
+}
+
+.day-btn {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: rgba(255, 255, 255, 0.7);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 1rem;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.day-btn.active {
+    background: rgba(255, 107, 107, 0.3);
+    color: rgba(255, 255, 255, 0.95);
+    border-color: rgba(255, 107, 107, 0.5);
+    transform: scale(1.1);
+}
+
+.day-btn:hover {
+    background: rgba(255, 255, 255, 0.15);
+    transform: scale(1.05);
+}
+
+/* Botones de acción */
+.alarm-actions {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    margin-top: 40px;
+}
+
+.alarm-btn {
+    background: rgba(255, 255, 255, 0.15);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 24px;
+    padding: 16px 32px;
+    color: rgba(255, 255, 255, 0.9);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 1.1rem;
+    font-weight: 500;
+    backdrop-filter: blur(10px);
+    position: relative;
+    overflow: hidden;
+    min-width: 160px;
+}
+
+.alarm-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 255, 255, 0.1),
+        transparent
+    );
+    transition: left 0.5s;
+}
+
+.alarm-btn:hover::before {
+    left: 100%;
+}
+
+.alarm-btn:hover {
+    background: rgba(255, 255, 255, 0.25);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+.alarm-btn.primary {
+    background: linear-gradient(135deg, #ff6b6b, #ff8e8e);
+    border-color: rgba(255, 107, 107, 0.3);
+    color: white;
+}
+
+.alarm-btn.primary:hover {
+    background: linear-gradient(135deg, #ff5252, #ff7676);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(255, 107, 107, 0.3);
+}
+
+/* Lista de alarmas */
+.alarms-list {
+    margin-top: 40px;
+}
+
+.alarms-title {
+    font-size: 1.5rem;
+    color: rgba(255, 255, 255, 0.9);
+    margin-bottom: 24px;
+    text-align: center;
+    font-weight: 500;
+}
+
+.alarm-item {
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 20px;
+    padding: 20px 24px;
+    margin-bottom: 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
+}
+
+.alarm-item:hover {
+    background: rgba(255, 255, 255, 0.12);
+    transform: translateX(6px);
+}
+
+.alarm-info {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.alarm-time {
+    font-size: 1.4rem;
+    color: rgba(255, 255, 255, 0.95);
+    font-weight: 500;
+}
+
+.alarm-days {
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.alarm-controls {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+}
+
+.alarm-toggle {
+    width: 56px;
+    height: 28px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 14px;
+    position: relative;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.alarm-toggle.active {
+    background: rgba(255, 107, 107, 0.5);
+}
+
+.alarm-toggle::after {
+    content: '';
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    width: 24px;
+    height: 24px;
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 50%;
+    transition: all 0.3s ease;
+}
+
+.alarm-toggle.active::after {
+    transform: translateX(28px);
+}
+
+.delete-alarm {
+    background: rgba(255, 107, 107, 0.2);
+    border: 1px solid rgba(255, 107, 107, 0.3);
+    border-radius: 12px;
+    padding: 8px 16px;
+    color: rgba(255, 107, 107, 0.9);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 0.9rem;
+}
+
+.delete-alarm:hover {
+    background: rgba(255, 107, 107, 0.3);
+    transform: scale(1.05);
+}
+
+/* Animaciones */
+@keyframes slideInRight {
+    from {
+        opacity: 0;
+        transform: translateX(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.alarm-section.active {
+    display: block;
+    animation: slideInRight 0.5s ease-out;
+}
+
+/* Responsive - Tablet */
+@media (max-width: 768px) {
+    .alarm-card {
+        padding: 32px 24px;
+        border-radius: 24px;
+        margin: 0 16px;
+    }
+    
+    .alarm-title {
+        font-size: 2rem;
+    }
+    
+    .alarm-subtitle {
+        font-size: 0.9rem;
+    }
+    
+    .time-input-group {
+        gap: 12px;
+    }
+    
+    .time-input {
+        width: 70px;
+        padding: 14px 16px;
+        font-size: 1.1rem;
+    }
+    
+    .time-separator {
+        font-size: 1.3rem;
+    }
+    
+    .days-selector {
+        gap: 6px;
+        justify-content: space-between;
+        max-width: 320px;
+        margin: 16px auto 0;
+    }
+    
+    .day-btn {
+        width: 36px;
+        height: 36px;
+        font-size: 0.7rem;
+    }
+    
+    .alarm-actions {
+        flex-direction: column;
+        gap: 12px;
+        margin-top: 24px;
+    }
+    
+    .alarm-btn {
+        width: 100%;
+        padding: 14px 20px;
+        font-size: 0.95rem;
+    }
+    
+    .alarm-item {
+        padding: 14px 16px;
+        margin-bottom: 10px;
+    }
+    
+    .alarm-time {
+        font-size: 1.1rem;
+    }
+    
+    .alarm-days {
+        font-size: 0.75rem;
+    }
+    
+    .alarm-controls {
+        gap: 6px;
+    }
+    
+    .alarm-toggle {
+        width: 44px;
+        height: 22px;
+    }
+    
+    .alarm-toggle::after {
+        width: 18px;
+        height: 18px;
+    }
+    
+    .alarm-toggle.active::after {
+        transform: translateX(22px);
+    }
+    
+    .delete-alarm {
+        padding: 5px 8px;
+        font-size: 0.75rem;
+    }
+}
+
+/* Responsive - Mobile */
+@media (max-width: 480px) {
+    .alarm-card {
+        padding: 24px 20px;
+        border-radius: 20px;
+        margin: 0 12px;
+    }
+    
+    .alarm-title {
+        font-size: 1.8rem;
+        margin-bottom: 6px;
+    }
+    
+    .alarm-subtitle {
+        font-size: 0.85rem;
+    }
+    
+    .alarm-form {
+        gap: 20px;
+        margin-bottom: 24px;
+    }
+    
+    .time-input-group {
+        flex-direction: column;
+        gap: 8px;
+        align-items: center;
+    }
+    
+    .time-input {
+        width: 100%;
+        max-width: 120px;
+        padding: 12px 16px;
+        font-size: 1rem;
+    }
+    
+    .time-separator {
+        display: none;
+    }
+    
+    .period-selector {
+        margin-top: 12px;
+        gap: 6px;
+    }
+    
+    .period-btn {
+        padding: 6px 12px;
+        font-size: 0.8rem;
+    }
+    
+    .days-selector {
+        gap: 4px;
+        justify-content: space-between;
+        max-width: 280px;
+        margin: 12px auto 0;
+    }
+    
+    .day-btn {
+        width: 32px;
+        height: 32px;
+        font-size: 0.65rem;
+    }
+    
+    .alarm-actions {
+        margin-top: 20px;
+        gap: 10px;
+    }
+    
+    .alarm-btn {
+        padding: 12px 16px;
+        font-size: 0.9rem;
+        border-radius: 16px;
+    }
+    
+    .alarms-list {
+        margin-top: 24px;
+    }
+    
+    .alarms-title {
+        font-size: 1.1rem;
+        margin-bottom: 16px;
+    }
+    
+    .alarm-item {
+        padding: 12px 14px;
+        margin-bottom: 8px;
+        border-radius: 12px;
+    }
+    
+    .alarm-info {
+        gap: 2px;
+    }
+    
+    .alarm-time {
+        font-size: 1rem;
+    }
+    
+    .alarm-days {
+        font-size: 0.7rem;
+    }
+    
+    .alarm-controls {
+        gap: 4px;
+    }
+    
+    .alarm-toggle {
+        width: 40px;
+        height: 20px;
+    }
+    
+    .alarm-toggle::after {
+        width: 16px;
+        height: 16px;
+    }
+    
+    .alarm-toggle.active::after {
+        transform: translateX(20px);
+    }
+    
+    .delete-alarm {
+        padding: 4px 6px;
+        font-size: 0.7rem;
+        border-radius: 6px;
+    }
+}
+
+/* Responsive - Small Mobile */
+@media (max-width: 360px) {
+    .alarm-card {
+        padding: 20px 16px;
+        margin: 0 8px;
+    }
+    
+    .alarm-title {
+        font-size: 1.6rem;
+    }
+    
+    .alarm-subtitle {
+        font-size: 0.8rem;
+    }
+    
+    .time-input {
+        max-width: 100px;
+        padding: 10px 12px;
+        font-size: 0.9rem;
+    }
+    
+    .days-selector {
+        max-width: 240px;
+        gap: 2px;
+    }
+    
+    .day-btn {
+        width: 28px;
+        height: 28px;
+        font-size: 0.6rem;
+    }
+    
+    .alarm-btn {
+        padding: 10px 14px;
+        font-size: 0.85rem;
+    }
+    
+    .alarm-item {
+        padding: 10px 12px;
+        flex-direction: column;
+        gap: 8px;
+        align-items: flex-start;
+    }
+    
+    .alarm-controls {
+        width: 100%;
+        justify-content: space-between;
+    }
+}
+
+/* Modo oscuro */
+@media (prefers-color-scheme: dark) {
+    .alarm-card {
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    
+    .time-input {
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    
+    .time-input:focus {
+        background: rgba(255, 255, 255, 0.1);
+        border-color: rgba(255, 255, 255, 0.2);
+    }
+    
+    .period-btn {
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    
+    .period-btn.active {
+        background: rgba(255, 255, 255, 0.15);
+    }
+    
+    .day-btn {
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    
+    .alarm-btn {
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    
+    .alarm-item {
+        background: rgba(255, 255, 255, 0.03);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+    
+    .alarm-item:hover {
+        background: rgba(255, 255, 255, 0.08);
+    }
+} 

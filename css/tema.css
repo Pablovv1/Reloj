@@ -1,0 +1,373 @@
+/* ===== TEMAS DE LA APLICACIÓN ===== */
+
+/* Variables CSS para tema claro */
+:root {
+    /* Colores base */
+    --primary-color: #4a90e2;
+    --secondary-color: #f39c12;
+    --accent-color: #e74c3c;
+    --success-color: #27ae60;
+    --warning-color: #f1c40f;
+    --info-color: #3498db;
+    
+    /* Colores de fondo */
+    --bg-primary: #ffffff;
+    --bg-secondary: #f8f9fa;
+    --bg-tertiary: #e9ecef;
+    --bg-glass: rgba(255, 255, 255, 0.1);
+    --bg-glass-hover: rgba(255, 255, 255, 0.15);
+    --bg-modal: rgba(255, 255, 255, 0.95);
+    --bg-overlay: rgba(0, 0, 0, 0.3);
+    
+    /* Colores de texto */
+    --text-primary: #2c3e50;
+    --text-secondary: #6c757d;
+    --text-muted: #95a5a6;
+    --text-light: #ffffff;
+    --text-dark: #2c3e50;
+    
+    /* Colores de bordes */
+    --border-primary: rgba(255, 255, 255, 0.2);
+    --border-secondary: rgba(0, 0, 0, 0.1);
+    --border-focus: #4a90e2;
+    
+    /* Sombras */
+    --shadow-light: 0 2px 10px rgba(0, 0, 0, 0.1);
+    --shadow-medium: 0 4px 20px rgba(0, 0, 0, 0.15);
+    --shadow-heavy: 0 8px 30px rgba(0, 0, 0, 0.2);
+    
+    /* Gradientes */
+    --gradient-primary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    --gradient-secondary: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+    --gradient-accent: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+    
+    /* Estados */
+    --state-hover: rgba(74, 144, 226, 0.1);
+    --state-active: rgba(74, 144, 226, 0.2);
+    --state-disabled: rgba(108, 117, 125, 0.3);
+    
+    /* Tamaños de fuente */
+    --font-size-small: 14px;
+    --font-size-medium: 16px;
+    --font-size-large: 20px;
+    --font-size-xlarge: 24px;
+    --font-size-global: var(--font-size-medium);
+}
+
+/* Tema oscuro */
+[data-theme="dark"] {
+    /* Colores base */
+    --primary-color: #64b5f6;
+    --secondary-color: #ffb74d;
+    --accent-color: #ef5350;
+    --success-color: #66bb6a;
+    --warning-color: #ffd54f;
+    --info-color: #42a5f5;
+    
+    /* Colores de fondo */
+    --bg-primary: #1a1a1a;
+    --bg-secondary: #2d2d2d;
+    --bg-tertiary: #404040;
+    --bg-glass: rgba(0, 0, 0, 0.3);
+    --bg-glass-hover: rgba(0, 0, 0, 0.4);
+    --bg-modal: rgba(26, 26, 26, 0.95);
+    --bg-overlay: rgba(0, 0, 0, 0.7);
+    
+    /* Colores de texto */
+    --text-primary: #ffffff;
+    --text-secondary: #b0b0b0;
+    --text-muted: #808080;
+    --text-light: #ffffff;
+    --text-dark: #e0e0e0;
+    
+    /* Colores de bordes */
+    --border-primary: rgba(255, 255, 255, 0.1);
+    --border-secondary: rgba(255, 255, 255, 0.05);
+    --border-focus: #64b5f6;
+    
+    /* Sombras */
+    --shadow-light: 0 2px 10px rgba(0, 0, 0, 0.3);
+    --shadow-medium: 0 4px 20px rgba(0, 0, 0, 0.4);
+    --shadow-heavy: 0 8px 30px rgba(0, 0, 0, 0.5);
+    
+    /* Gradientes */
+    --gradient-primary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    --gradient-secondary: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+    --gradient-accent: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+    
+    /* Estados */
+    --state-hover: rgba(100, 181, 246, 0.1);
+    --state-active: rgba(100, 181, 246, 0.2);
+    --state-disabled: rgba(128, 128, 128, 0.3);
+}
+
+/* Tema automático (basado en preferencias del sistema) */
+[data-theme="auto"] {
+    /* Los estilos se aplican automáticamente según la preferencia del sistema */
+}
+
+/* ===== APLICACIÓN DE TEMAS ===== */
+
+/* Transiciones suaves para cambios de tema */
+* {
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Elementos principales */
+body {
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    font-size: var(--font-size-global);
+}
+
+/* Aplicar tamaño de fuente global a todos los elementos */
+* {
+    font-size: inherit;
+}
+
+html {
+    font-size: var(--font-size-global);
+}
+
+/* Elementos específicos que necesitan el tamaño de fuente */
+.clock-display,
+.sidebar-item,
+.config-title,
+.config-label,
+.config-description,
+.config-select,
+.config-btn,
+.btn,
+.message,
+.stat-value,
+.stat-label,
+.shortcuts-title,
+.shortcuts-list,
+.shortcut-item,
+.shortcut-key,
+.shortcut-action {
+    font-size: var(--font-size-global);
+}
+
+/* Tarjeta del reloj */
+.clock-card {
+    background: var(--bg-glass);
+    border: 1px solid var(--border-primary);
+    box-shadow: var(--shadow-medium);
+}
+
+.clock-card:hover {
+    background: var(--bg-glass-hover);
+    box-shadow: var(--shadow-heavy);
+}
+
+/* Menú lateral */
+.sidebar {
+    background: var(--bg-glass);
+    border-right: 1px solid var(--border-primary);
+}
+
+.sidebar-item {
+    color: var(--text-primary);
+    background: transparent;
+}
+
+.sidebar-item:hover {
+    background: var(--state-hover);
+}
+
+.sidebar-item.active {
+    background: var(--state-active);
+    color: var(--primary-color);
+}
+
+/* Botón de configuración */
+.config-button {
+    background: var(--bg-glass);
+    border: 1px solid var(--border-primary);
+    color: var(--text-primary);
+}
+
+.config-button:hover {
+    background: var(--bg-glass-hover);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-medium);
+}
+
+/* Modal de configuración */
+.config-modal {
+    background: var(--bg-modal);
+    border: 1px solid var(--border-primary);
+    box-shadow: var(--shadow-heavy);
+}
+
+.config-overlay {
+    background: var(--bg-overlay);
+}
+
+/* Controles de formulario */
+.config-select,
+.config-input {
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-secondary);
+    color: var(--text-primary);
+}
+
+.config-select:focus,
+.config-input:focus {
+    border-color: var(--border-focus);
+    box-shadow: 0 0 0 2px rgba(74, 144, 226, 0.2);
+}
+
+/* Toggles */
+.toggle {
+    background: var(--bg-tertiary);
+    border: 1px solid var(--border-secondary);
+}
+
+.toggle.active {
+    background: var(--primary-color);
+    border-color: var(--primary-color);
+}
+
+/* Botones */
+.btn {
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-secondary);
+    color: var(--text-primary);
+}
+
+.btn:hover {
+    background: var(--state-hover);
+}
+
+.btn-primary {
+    background: var(--primary-color);
+    color: var(--text-light);
+}
+
+.btn-primary:hover {
+    background: var(--primary-color);
+    opacity: 0.9;
+}
+
+/* Secciones de la aplicación */
+.section {
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-secondary);
+}
+
+/* Listas */
+.list-item {
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-secondary);
+    color: var(--text-primary);
+}
+
+.list-item:hover {
+    background: var(--state-hover);
+}
+
+/* Mensajes */
+.message {
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-secondary);
+    color: var(--text-primary);
+}
+
+.message.success {
+    background: var(--success-color);
+    color: var(--text-light);
+}
+
+.message.error {
+    background: var(--accent-color);
+    color: var(--text-light);
+}
+
+/* Scrollbars personalizados */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--bg-secondary);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--border-secondary);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--text-muted);
+}
+
+/* ===== ANIMACIONES ESPECÍFICAS POR TEMA ===== */
+
+/* Animación de carga */
+@keyframes loading-light {
+    0% { background: var(--bg-secondary); }
+    50% { background: var(--bg-tertiary); }
+    100% { background: var(--bg-secondary); }
+}
+
+@keyframes loading-dark {
+    0% { background: var(--bg-secondary); }
+    50% { background: var(--bg-tertiary); }
+    100% { background: var(--bg-secondary); }
+}
+
+.loading {
+    animation: loading-light 1.5s infinite;
+}
+
+[data-theme="dark"] .loading {
+    animation: loading-dark 1.5s infinite;
+}
+
+/* ===== RESPONSIVE POR TEMA ===== */
+
+@media (max-width: 768px) {
+    .clock-card {
+        background: var(--bg-glass);
+    }
+    
+    .sidebar {
+        background: var(--bg-modal);
+    }
+    
+    .config-modal {
+        background: var(--bg-primary);
+    }
+}
+
+/* ===== ACCESIBILIDAD ===== */
+
+/* Alto contraste para tema claro */
+@media (prefers-contrast: high) {
+    :root {
+        --text-primary: #000000;
+        --text-secondary: #333333;
+        --border-primary: #000000;
+        --border-secondary: #333333;
+    }
+}
+
+/* Alto contraste para tema oscuro */
+@media (prefers-contrast: high) {
+    [data-theme="dark"] {
+        --text-primary: #ffffff;
+        --text-secondary: #cccccc;
+        --border-primary: #ffffff;
+        --border-secondary: #cccccc;
+    }
+}
+
+/* Reducción de movimiento */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        transition: none !important;
+        animation: none !important;
+    }
+} 

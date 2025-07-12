@@ -1,0 +1,57 @@
+/* Estilos para el indicador de zona horaria */
+.timezone-indicator {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 20px;
+    padding: 8px 16px;
+    font-size: 0.8rem;
+    color: var(--text-color);
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    transition: all 0.3s ease;
+    z-index: 10;
+}
+
+.timezone-indicator:hover {
+    background: rgba(255, 255, 255, 0.15);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .timezone-indicator {
+        top: 5px;
+        right: 5px;
+        padding: 6px 12px;
+        font-size: 0.7rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .timezone-indicator {
+        position: relative;
+        top: auto;
+        right: auto;
+        margin: 10px auto;
+        text-align: center;
+        width: fit-content;
+    }
+}
+
+/* Modo oscuro */
+@media (prefers-color-scheme: dark) {
+    .timezone-indicator {
+        background: rgba(0, 0, 0, 0.3);
+        border-color: rgba(255, 255, 255, 0.1);
+        color: var(--text-color);
+    }
+    
+    .timezone-indicator:hover {
+        background: rgba(0, 0, 0, 0.4);
+    }
+} 

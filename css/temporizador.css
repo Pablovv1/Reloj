@@ -1,0 +1,598 @@
+/* Estilos para la sección de Temporizador */
+.timer-section {
+    display: none;
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.timer-card {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    border-radius: 36px;
+    padding: 50px 40px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 
+        0 8px 32px rgba(0, 0, 0, 0.1),
+        inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.timer-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 255, 255, 0.1),
+        transparent
+    );
+    transition: left 0.5s;
+}
+
+.timer-card:hover::before {
+    left: 100%;
+}
+
+.timer-header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.timer-title {
+    font-size: 3rem;
+    font-weight: 300;
+    color: rgba(255, 255, 255, 0.95);
+    margin-bottom: 12px;
+    letter-spacing: -1.5px;
+}
+
+.timer-subtitle {
+    font-size: 1.2rem;
+    color: rgba(255, 255, 255, 0.7);
+    font-weight: 400;
+}
+
+/* Display del tiempo */
+.time-display {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.time {
+    font-size: 5rem;
+    font-weight: 200;
+    color: rgba(255, 255, 255, 0.95);
+    letter-spacing: -4px;
+    margin-bottom: 16px;
+    font-variant-numeric: tabular-nums;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.time-label {
+    font-size: 1.3rem;
+    color: rgba(255, 255, 255, 0.7);
+    font-weight: 400;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+/* Barra de progreso */
+.progress-container {
+    margin-bottom: 40px;
+}
+
+.progress-bar {
+    width: 100%;
+    height: 12px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 6px;
+    overflow: hidden;
+    position: relative;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #4facfe 0%, #00f2fe 100%);
+    border-radius: 6px;
+    transition: width 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.progress-fill::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 255, 255, 0.3),
+        transparent
+    );
+    animation: shimmer 2s infinite;
+}
+
+@keyframes shimmer {
+    0% { left: -100%; }
+    100% { left: 100%; }
+}
+
+/* Controles de tiempo */
+.time-controls {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    margin-bottom: 40px;
+}
+
+.time-input-group {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+}
+
+.time-input {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 18px;
+    padding: 18px 24px;
+    font-size: 1.4rem;
+    color: rgba(255, 255, 255, 0.9);
+    text-align: center;
+    backdrop-filter: blur(10px);
+    transition: all 0.3s ease;
+    width: 100px;
+}
+
+.time-input:focus {
+    outline: none;
+    border-color: rgba(255, 255, 255, 0.4);
+    background: rgba(255, 255, 255, 0.15);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.time-label-small {
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.6);
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* Presets de tiempo */
+.presets {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: 40px;
+}
+
+.preset-btn {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 16px;
+    padding: 12px 24px;
+    color: rgba(255, 255, 255, 0.7);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 1.1rem;
+    font-weight: 500;
+}
+
+.preset-btn:hover {
+    background: rgba(255, 255, 255, 0.15);
+    transform: translateY(-2px);
+}
+
+.preset-btn.active {
+    background: rgba(255, 255, 255, 0.2);
+    color: rgba(255, 255, 255, 0.95);
+    border-color: rgba(255, 255, 255, 0.3);
+}
+
+/* Estado del temporizador */
+.timer-status {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.status-text {
+    font-size: 1.3rem;
+    color: rgba(255, 255, 255, 0.8);
+    font-weight: 500;
+    padding: 12px 24px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    display: inline-block;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.status-text.running {
+    background: rgba(79, 172, 254, 0.2);
+    color: rgba(255, 255, 255, 0.95);
+    border-color: rgba(79, 172, 254, 0.3);
+    animation: pulse 2s infinite;
+}
+
+.status-text.paused {
+    background: rgba(255, 193, 7, 0.2);
+    color: rgba(255, 255, 255, 0.95);
+    border-color: rgba(255, 193, 7, 0.3);
+}
+
+.status-text.finished {
+    background: rgba(255, 107, 107, 0.2);
+    color: rgba(255, 255, 255, 0.95);
+    border-color: rgba(255, 107, 107, 0.3);
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.8; }
+}
+
+/* Botones de control */
+.timer-controls {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    margin-bottom: 40px;
+}
+
+.timer-btn {
+    background: rgba(255, 255, 255, 0.15);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 24px;
+    padding: 16px 32px;
+    color: rgba(255, 255, 255, 0.9);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 1.1rem;
+    font-weight: 500;
+    backdrop-filter: blur(10px);
+    position: relative;
+    overflow: hidden;
+    min-width: 160px;
+}
+
+.timer-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 255, 255, 0.1),
+        transparent
+    );
+    transition: left 0.5s;
+}
+
+.timer-btn:hover::before {
+    left: 100%;
+}
+
+.timer-btn:hover {
+    background: rgba(255, 255, 255, 0.25);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+.timer-btn.primary {
+    background: linear-gradient(135deg, #4facfe, #00f2fe);
+    border-color: rgba(79, 172, 254, 0.3);
+    color: white;
+}
+
+.timer-btn.primary:hover {
+    background: linear-gradient(135deg, #3a9bfe, #00e6fe);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(79, 172, 254, 0.3);
+}
+
+.timer-btn.secondary {
+    background: linear-gradient(135deg, #ff9800, #ffb74d);
+    border-color: rgba(255, 152, 0, 0.3);
+    color: white;
+}
+
+.timer-btn.secondary:hover {
+    background: linear-gradient(135deg, #f57c00, #ffa726);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(255, 152, 0, 0.3);
+}
+
+.timer-btn.danger {
+    background: linear-gradient(135deg, #ff6b6b, #ff8e8e);
+    border-color: rgba(255, 107, 107, 0.3);
+    color: white;
+}
+
+.timer-btn.danger:hover {
+    background: linear-gradient(135deg, #ff5252, #ff7676);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(255, 107, 107, 0.3);
+}
+
+.timer-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none !important;
+    box-shadow: none !important;
+}
+
+.timer-btn:disabled:hover {
+    background: rgba(255, 255, 255, 0.15);
+    transform: none;
+    box-shadow: none;
+}
+
+/* Animaciones */
+@keyframes slideInRight {
+    from {
+        opacity: 0;
+        transform: translateX(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.timer-section.active {
+    display: block;
+    animation: slideInRight 0.5s ease-out;
+}
+
+/* Responsive - Tablet */
+@media (max-width: 768px) {
+    .timer-card {
+        padding: 32px 24px;
+        border-radius: 24px;
+        margin: 0 16px;
+    }
+    
+    .timer-title {
+        font-size: 2rem;
+    }
+    
+    .timer-subtitle {
+        font-size: 0.9rem;
+    }
+    
+    .time {
+        font-size: 3.2rem;
+        letter-spacing: -2px;
+    }
+    
+    .time-label {
+        font-size: 1rem;
+    }
+    
+    .time-controls {
+        gap: 12px;
+    }
+    
+    .time-input {
+        width: 70px;
+        padding: 14px 16px;
+        font-size: 1.1rem;
+    }
+    
+    .time-label-small {
+        font-size: 0.75rem;
+    }
+    
+    .presets {
+        gap: 8px;
+        margin-bottom: 24px;
+    }
+    
+    .preset-btn {
+        padding: 8px 16px;
+        font-size: 0.9rem;
+    }
+    
+    .timer-controls {
+        flex-direction: column;
+        gap: 12px;
+        margin-bottom: 24px;
+    }
+    
+    .timer-btn {
+        width: 100%;
+        padding: 14px 20px;
+        font-size: 0.95rem;
+    }
+    
+    .status-text {
+        font-size: 1rem;
+        padding: 10px 20px;
+    }
+}
+
+/* Responsive - Mobile */
+@media (max-width: 480px) {
+    .timer-card {
+        padding: 24px 20px;
+        border-radius: 20px;
+        margin: 0 12px;
+    }
+    
+    .timer-title {
+        font-size: 1.8rem;
+        margin-bottom: 6px;
+    }
+    
+    .timer-subtitle {
+        font-size: 0.85rem;
+    }
+    
+    .time {
+        font-size: 2.8rem;
+        letter-spacing: -1.5px;
+    }
+    
+    .time-label {
+        font-size: 0.9rem;
+    }
+    
+    .time-controls {
+        flex-direction: column;
+        gap: 8px;
+        align-items: center;
+    }
+    
+    .time-input {
+        width: 100%;
+        max-width: 120px;
+        padding: 12px 16px;
+        font-size: 1rem;
+    }
+    
+    .time-label-small {
+        font-size: 0.7rem;
+    }
+    
+    .presets {
+        gap: 6px;
+        margin-bottom: 20px;
+    }
+    
+    .preset-btn {
+        padding: 6px 12px;
+        font-size: 0.8rem;
+    }
+    
+    .timer-controls {
+        margin-bottom: 20px;
+        gap: 10px;
+    }
+    
+    .timer-btn {
+        padding: 12px 16px;
+        font-size: 0.9rem;
+        border-radius: 16px;
+    }
+    
+    .status-text {
+        font-size: 0.9rem;
+        padding: 8px 16px;
+    }
+}
+
+/* Responsive - Small Mobile */
+@media (max-width: 360px) {
+    .timer-card {
+        padding: 20px 16px;
+        margin: 0 8px;
+    }
+    
+    .timer-title {
+        font-size: 1.6rem;
+    }
+    
+    .timer-subtitle {
+        font-size: 0.8rem;
+    }
+    
+    .time {
+        font-size: 2.4rem;
+        letter-spacing: -1px;
+    }
+    
+    .time-label {
+        font-size: 0.8rem;
+    }
+    
+    .time-input {
+        max-width: 100px;
+        padding: 10px 12px;
+        font-size: 0.9rem;
+    }
+    
+    .time-label-small {
+        font-size: 0.65rem;
+    }
+    
+    .presets {
+        gap: 4px;
+        margin-bottom: 16px;
+    }
+    
+    .preset-btn {
+        padding: 5px 8px;
+        font-size: 0.75rem;
+    }
+    
+    .timer-controls {
+        margin-bottom: 16px;
+        gap: 8px;
+    }
+    
+    .timer-btn {
+        padding: 10px 14px;
+        font-size: 0.85rem;
+    }
+    
+    .status-text {
+        font-size: 0.8rem;
+        padding: 6px 12px;
+    }
+}
+
+/* Modo oscuro */
+@media (prefers-color-scheme: dark) {
+    .timer-card {
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    
+    .time-input {
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    
+    .time-input:focus {
+        background: rgba(255, 255, 255, 0.1);
+        border-color: rgba(255, 255, 255, 0.2);
+    }
+    
+    .preset-btn {
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    
+    .preset-btn.active {
+        background: rgba(255, 255, 255, 0.15);
+    }
+    
+    .timer-btn {
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    
+    .status-text {
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+} 

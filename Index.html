@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-translate="clock">Reloj Moderno</title>
+    <link rel="shortcut icon" href="favicon.png" type="image/x-icon">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/tema.css">
+    <link rel="stylesheet" href="css/alarma.css">
+    <link rel="stylesheet" href="css/temporizador.css">
+    <link rel="stylesheet" href="css/cronometro.css">
+    <link rel="stylesheet" href="css/configuracion.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Menú lateral -->
+    <nav class="sidebar-menu">
+        <div class="menu-container">
+            <div class="menu-item" data-section="alarma">
+                <div class="menu-icon">⏰</div>
+                <span class="menu-text" data-translate="alarm">Alarma</span>
+            </div>
+            <div class="menu-item" data-section="temporizador">
+                <div class="menu-icon">⏱️</div>
+                <span class="menu-text" data-translate="timer">Temporizador</span>
+            </div>
+            <div class="menu-item" data-section="cronometro">
+                <div class="menu-icon">⏲️</div>
+                <span class="menu-text" data-translate="stopwatch">Cronómetro</span>
+            </div>
+            <div class="menu-item active" data-section="reloj">
+                <div class="menu-icon">🕐</div>
+                <span class="menu-text" data-translate="clock">Reloj</span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Botón de configuración -->
+    <div class="settings-button">
+        <button class="settings-btn" id="settingsBtn">
+            <div class="settings-icon">⚙️</div>
+            <span class="settings-text" data-translate="settings">Configuración</span>
+        </button>
+    </div>
+
+    <!-- Contenido principal -->
+    <main class="main-content">
+        <!-- Sección de Reloj -->
+        <div class="section-content" id="reloj-section">
+            <div class="container">
+                <div class="clock-card">
+                    <div class="clock-face">
+                        <div class="time-display">
+                            <div class="time" id="time"></div>
+                            <div class="date" id="date"></div>
+                        </div>
+                        <div class="analog-clock">
+                            <div class="clock-circle">
+                                <div class="hand hour-hand" id="hour-hand"></div>
+                                <div class="hand minute-hand" id="minute-hand"></div>
+                                <div class="hand second-hand" id="second-hand"></div>
+                                <div class="center-dot"></div>
+                                <!-- Marcadores de horas -->
+                                <div class="marker marker-12"></div>
+                                <div class="marker marker-3"></div>
+                                <div class="marker marker-6"></div>
+                                <div class="marker marker-9"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="clock-info">
+                        <div class="timezone" id="timezone" data-translate="local">Zona Horaria Local</div>
+                        <div class="period" id="period">AM</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sección de Alarma -->
+        <div class="section-content" id="alarma-section">
+            <div class="container">
+                <div class="alarm-card">
+                    <div class="alarm-header">
+                        <div class="alarm-title" data-translate="alarm">Alarma</div>
+                        <div class="alarm-subtitle" data-translate="setAlarm">Configura tus alarmas personalizadas</div>
+                    </div>
+                    
+                    <div class="alarm-form">
+                        <div class="time-input-group">
+                            <input type="number" class="time-input" id="alarmHour" placeholder="12" min="1" max="12">
+                            <span class="time-separator">:</span>
+                            <input type="number" class="time-input" id="alarmMinute" placeholder="00" min="0" max="59">
+                        </div>
+                        
+                        <div class="period-selector">
+                            <button class="period-btn active">AM</button>
+                            <button class="period-btn">PM</button>
+                        </div>
+                        
+                        <div class="days-selector">
+                            <button class="day-btn" data-day="mon" data-translate-title="monday">L</button>
+                            <button class="day-btn" data-day="tue" data-translate-title="tuesday">M</button>
+                            <button class="day-btn" data-day="wed" data-translate-title="wednesday">X</button>
+                            <button class="day-btn" data-day="thu" data-translate-title="thursday">J</button>
+                            <button class="day-btn" data-day="fri" data-translate-title="friday">V</button>
+                            <button class="day-btn" data-day="sat" data-translate-title="saturday">S</button>
+                            <button class="day-btn" data-day="sun" data-translate-title="sunday">D</button>
+                        </div>
+                    </div>
+                    
+                    <div class="alarm-actions">
+                        <button class="alarm-btn primary" id="setAlarmBtn" data-translate="setAlarm">Establecer Alarma</button>
+                        <button class="alarm-btn" id="clearAlarmBtn" data-translate="clearAll">Limpiar Todo</button>
+                    </div>
+                    
+                    <div class="alarms-list">
+                        <div class="alarms-title" id="alarmsTitle" data-translate="alarms">Alarmas (0)</div>
+                        <div id="alarmsList">
+                            <p style="text-align: center; color: rgba(255,255,255,0.6);" data-translate="noAlarms">No hay alarmas configuradas</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sección de Temporizador -->
+        <div class="section-content" id="temporizador-section">
+            <div class="container">
+                <div class="timer-card">
+                    <div class="timer-header">
+                        <div class="timer-title" data-translate="timer">Temporizador</div>
+                        <div class="timer-subtitle" data-translate="timerComplete">Cuenta regresiva personalizable</div>
+                    </div>
+                    
+                    <div class="time-display">
+                        <div class="time" id="timerDisplay"></div>
+                        <div class="time-label" id="timerStatus" data-translate="ready">Listo</div>
+                    </div>
+                    
+                    <div class="progress-container">
+                        <div class="progress-bar" id="progressBar">
+                            <div class="progress-fill" id="progressFill"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="time-controls">
+                        <div class="time-input-group">
+                            <input type="number" class="time-input" id="timerHour" placeholder="0" min="0" max="23">
+                            <div class="time-label-small" data-translate="hours">Horas</div>
+                        </div>
+                        <div class="time-input-group">
+                            <input type="number" class="time-input" id="timerMinute" placeholder="0" min="0" max="59">
+                            <div class="time-label-small" data-translate="minutes">Minutos</div>
+                        </div>
+                        <div class="time-input-group">
+                            <input type="number" class="time-input" id="timerSecond" placeholder="0" min="0" max="59">
+                            <div class="time-label-small" data-translate="seconds">Segundos</div>
+                        </div>
+                    </div>
+                    
+                    <div class="presets">
+                        <button class="preset-btn" data-minutes="5">5 min</button>
+                        <button class="preset-btn" data-minutes="10">10 min</button>
+                        <button class="preset-btn" data-minutes="15">15 min</button>
+                        <button class="preset-btn" data-minutes="30">30 min</button>
+                        <button class="preset-btn" data-minutes="60" data-translate="hours">1 hora</button>
+                    </div>
+                    
+                    <div class="timer-controls">
+                        <button class="timer-btn primary" id="timerStart" data-translate="start">Iniciar</button>
+                        <button class="timer-btn secondary" id="timerPause" data-translate="pause" disabled>Pausar</button>
+                        <button class="timer-btn danger" id="timerReset" data-translate="reset" disabled>Reiniciar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sección de Cronómetro -->
+        <div class="section-content" id="cronometro-section">
+            <div class="container">
+                <div class="stopwatch-card">
+                    <div class="stopwatch-header">
+                        <div class="stopwatch-title" data-translate="stopwatch">Cronómetro</div>
+                        <div class="stopwatch-subtitle" data-translate="ready">Mide el tiempo con precisión</div>
+                    </div>
+                    
+                    <div class="stopwatch-display">
+                        <div class="stopwatch-time" id="stopwatchDisplay"></div>
+                        <div class="stopwatch-status" id="stopwatchStatus" data-translate="ready">Listo</div>
+                    </div>
+                    
+                    <div class="stopwatch-controls">
+                        <button class="stopwatch-btn primary" id="stopwatchStart" data-translate="start">Iniciar</button>
+                        <button class="stopwatch-btn secondary" id="stopwatchStop" data-translate="stop" disabled>Detener</button>
+                        <button class="stopwatch-btn danger" id="stopwatchReset" data-translate="reset" disabled>Reiniciar</button>
+                    </div>
+                    
+                    <div class="lap-button-container">
+                        <button class="lap-btn" id="stopwatchLap" data-translate="lap" disabled>
+                            <span class="lap-btn-icon">⏱️</span>
+                            <span data-translate="lap">Vuelta</span>
+                        </button>
+                    </div>
+                    
+                    <div class="laps-list">
+                        <div class="laps-title" data-translate="laps">Vueltas</div>
+                        <div id="lapsList">
+                            <p style="text-align: center; color: rgba(255,255,255,0.6);" data-translate="noLaps">No hay vueltas registradas</p>
+                        </div>
+                    </div>
+                    
+                    <div class="stopwatch-stats">
+                        <div class="stat-item">
+                            <div class="stat-value" id="bestLap">--:--:--</div>
+                            <div class="stat-label" data-translate="bestLap">Mejor Vuelta</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-value" id="avgLap">--:--:--</div>
+                            <div class="stat-label" data-translate="average">Promedio</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-value" id="totalTime">--:--:--</div>
+                            <div class="stat-label" data-translate="totalTime">Tiempo Total</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-value" id="lapCount">0</div>
+                            <div class="stat-label" data-translate="lapCount">Vueltas</div>
+                        </div>
+                    </div>
+                    
+                    <div class="shortcuts-info">
+                        <div class="shortcuts-title">Atajos de Teclado</div>
+                        <div class="shortcuts-list">
+                            <div class="shortcut-item">
+                                <div class="shortcut-key">Espacio</div>
+                                <div class="shortcut-action" data-translate="start">Iniciar/Detener</div>
+                            </div>
+                            <div class="shortcut-item">
+                                <div class="shortcut-key">L</div>
+                                <div class="shortcut-action" data-translate="lap">Marcar Vuelta</div>
+                            </div>
+                            <div class="shortcut-item">
+                                <div class="shortcut-key">R</div>
+                                <div class="shortcut-action" data-translate="reset">Reiniciar</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    
+
+    <!-- Modal de Configuración -->
+    <div id="configModal" class="config-modal">
+        <div id="configOverlay" class="config-overlay"></div>
+        <div id="configContent" class="config-content">
+            <div class="config-card">
+                <div class="config-header">
+                    <h2 class="config-title" data-translate="settings">⚙️ Configuración</h2>
+                    <p class="config-subtitle" data-translate="settingsSaved">Personaliza tu experiencia de reloj</p>
+                </div>
+                
+                <div class="config-grid">
+                    <!-- Formato de Hora -->
+                    <div class="config-group">
+                        <h3 class="config-group-title">
+                            <span class="config-group-icon">🕐</span>
+                            <span data-translate="timeFormat">Formato de Hora</span>
+                        </h3>
+                        <div class="config-option">
+                            <label class="config-label" for="timeFormat" data-translate="timeFormat">Formato de visualización</label>
+                            <p class="config-description" data-translate="timeFormat">Elige cómo se muestra la hora en el reloj principal</p>
+                            <select id="timeFormat" class="config-select">
+                                <option value="24h" data-translate="24hour">24 horas (13:45)</option>
+                                <option value="12h" data-translate="12hour">12 horas (1:45 PM)</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <!-- Zona Horaria -->
+                    <div class="config-group">
+                        <h3 class="config-group-title">
+                            <span class="config-group-icon">🌍</span>
+                            <span data-translate="timezone">Zona Horaria</span>
+                        </h3>
+                        <div class="config-option">
+                            <label class="config-label" for="timezone" data-translate="timezone">Zona horaria</label>
+                            <p class="config-description" data-translate="timezone">Selecciona tu zona horaria local</p>
+                            <select id="timezone" class="config-select">
+                                <option value="local" data-translate="local">Local (Automático)</option>
+                                <option value="UTC" data-translate="utc">UTC</option>
+                                <option value="America/Mexico_City" data-translate="mexico">México (GMT-6)</option>
+                                <option value="America/New_York" data-translate="newYork">Nueva York (GMT-5)</option>
+                                <option value="Europe/Madrid" data-translate="madrid">Madrid (GMT+1)</option>
+                                <option value="Asia/Tokyo" data-translate="tokyo">Tokio (GMT+9)</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <!-- Tema -->
+                    <div class="config-group">
+                        <h3 class="config-group-title">
+                            <span class="config-group-icon">🎨</span>
+                            <span data-translate="theme">Tema</span>
+                        </h3>
+                        <div class="config-option">
+                            <label class="config-label" for="theme" data-translate="theme">Apariencia</label>
+                            <p class="config-description" data-translate="theme">Elige el tema visual de la aplicación</p>
+                            <select id="theme" class="config-select">
+                                <option value="auto" data-translate="auto">Automático (Sistema)</option>
+                                <option value="light" data-translate="light">Claro</option>
+                                <option value="dark" data-translate="dark">Oscuro</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <!-- Sonidos -->
+                    <div class="config-group">
+                        <h3 class="config-group-title">
+                            <span class="config-group-icon">🔊</span>
+                            <span data-translate="sounds">Sonidos</span>
+                        </h3>
+                        <div class="config-option">
+                            <div class="toggle-container">
+                                <div>
+                                    <label class="config-label" data-translate="sounds">Notificaciones de sonido</label>
+                                    <p class="config-description" data-translate="sounds">Activa sonidos para alarmas y notificaciones</p>
+                                </div>
+                                <div id="sounds" class="toggle-switch"></div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Idioma -->
+                    <div class="config-group">
+                        <h3 class="config-group-title">
+                            <span class="config-group-icon">🌐</span>
+                            <span data-translate="language">Idioma</span>
+                        </h3>
+                        <div class="config-option">
+                            <label class="config-label" for="language" data-translate="language">Idioma de la interfaz</label>
+                            <p class="config-description" data-translate="language">Selecciona el idioma para la aplicación</p>
+                            <select id="language" class="config-select">
+                                <option value="es" data-translate="es">Español</option>
+                                <option value="en" data-translate="en">English</option>
+                                <option value="fr" data-translate="fr">Français</option>
+                                <option value="de" data-translate="de">Deutsch</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <!-- Animaciones -->
+                    <div class="config-group">
+                        <h3 class="config-group-title">
+                            <span class="config-group-icon">✨</span>
+                            <span data-translate="animations">Animaciones</span>
+                        </h3>
+                        <div class="config-option">
+                            <div class="toggle-container">
+                                <div>
+                                    <label class="config-label" data-translate="animations">Efectos visuales</label>
+                                    <p class="config-description" data-translate="animations">Activa animaciones y transiciones suaves</p>
+                                </div>
+                                <div id="animations" class="toggle-switch"></div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Tamaño de Fuente -->
+                    <div class="config-group">
+                        <h3 class="config-group-title">
+                            <span class="config-group-icon">📝</span>
+                            <span data-translate="fontSize">Tamaño de Fuente</span>
+                        </h3>
+                        <div class="config-option">
+                            <label class="config-label" for="fontSize" data-translate="fontSize">Tamaño del texto</label>
+                            <p class="config-description" data-translate="fontSize">Ajusta el tamaño de la fuente para mejor legibilidad</p>
+                            <div style="display: flex; align-items: center; gap: 12px;">
+                                <input type="range" id="fontSize" class="config-range" min="1" max="100" value="33">
+                                <span id="fontSizeValue" class="range-value" data-translate="medium">Mediana</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="config-actions">
+                    <button id="saveConfig" class="config-btn primary" data-translate="save">💾 Guardar</button>
+                    <button id="resetConfig" class="config-btn secondary" data-translate="reset">🔄 Restablecer</button>
+                    <button id="cancelConfig" class="config-btn secondary" data-translate="cancel">❌ Cancelar</button>
+                </div>
+                
+                <div id="configMessage" class="config-message"></div>
+            </div>
+        </div>
+    </div>
+
+       <!-- Scripts -->
+    <script src="js/script.js"></script>
+    <script src="js/alarma.js"></script>
+    <script src="js/temporizador.js"></script>
+    <script src="js/cronometro.js"></script>
+    <script src="js/formato-hora.js"></script>
+    <script src="js/zona-horaria.js"></script>
+    <script src="js/tema.js"></script>
+    <script src="js/sonidos.js"></script>
+    <script src="js/idioma.js"></script>
+    <script src="js/animaciones.js"></script>
+    <script src="js/tamano-fuente.js"></script>
+    <script src="js/configuracion.js"></script>
+</body>
+</html>
